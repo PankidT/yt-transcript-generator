@@ -26,10 +26,6 @@ export const Navbar: React.FC = () => {
     window.addEventListener("scroll", changeBackground);
   });
 
-  useEffect(() => {
-    console.log("navbarColor", navbarColor);
-  }, [navbarColor]);
-
   return (
     <div
       className={`navbar fixed left-0 top-0 z-[999] w-full transition-colors duration-300 ${navbarColor}`}

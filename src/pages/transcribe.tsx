@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function transcribe() {
+  const [onClick, setOnClick] = React.useState(false);
+  const handleClick = () => setOnClick(!onClick);
+
   return (
-    <div
-      className="flex h-screen w-screen flex-col items-center gap-1 p-1"
-      id="screen"
-    >
+    <div className="flex h-screen w-screen flex-col items-center gap-1 p-1">
       <div className="no-scrollbar flex h-24 w-full justify-center overflow-y-scroll rounded-xl"></div>
       <div className="flex h-full w-[100vw] flex-col gap-2 sm:w-[80vw]">
         <div className="flex h-[90%] flex-col gap-4 rounded-xl bg-neutral p-4 shadow-md">
@@ -20,13 +20,30 @@ export default function transcribe() {
               className="input-bordered input-primary input w-full"
             />
           </div>
-          <textarea
-            className="textarea-bordered textarea h-full"
-            placeholder=""
-          ></textarea>
+          {onClick ? (
+            <textarea
+              className="textarea-bordered textarea h-full"
+              placeholder="text1"
+            ></textarea>
+          ) : (
+            <textarea
+              className="textarea-bordered textarea h-full"
+              placeholder="text2"
+            ></textarea>
+          )}
           <div className="tabs tabs-boxed justify-center">
-            <a className="tab tab-active">Processing</a>
-            <a className="tab">Output</a>
+            <a
+              className={`tab ${onClick ? "tab-active" : ""}`}
+              onClick={handleClick}
+            >
+              Processing
+            </a>
+            <a
+              className={`tab ${!onClick ? "tab-active" : ""}`}
+              onClick={handleClick}
+            >
+              Output
+            </a>
           </div>
         </div>
       </div>
