@@ -11,8 +11,6 @@ export const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
 
     const videoUrl = (e.target as HTMLFormElement | undefined)?.videoUrl
       ?.value as string;
-
-    console.log("From videoForm.tsx", videoUrl);
     onSubmit(videoUrl);
   };
 

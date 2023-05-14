@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { VideoForm } from "~/Components/videoForm";
-import { extractVideoIdFromUrl, processVideo } from "~/utils/api-client";
+import {
+  extractVideoIdFromUrl,
+  processVideo,
+  downloadAudio,
+} from "~/utils/api-client";
 
 export default function transcribe() {
   const [onClick, setOnClick] = useState(true);
@@ -10,27 +14,32 @@ export default function transcribe() {
   const [progressOutput, setProgressOutput] = useState("");
   const [resultTranscript, setResultTranscript] = useState("");
 
-  useEffect(() => {
-    const video_id = extractVideoIdFromUrl(
-      "https://www.youtube.com/watch?v=sAuEeM_6zpk"
-    );
-    console.log("video_id", video_id, "type", typeof video_id);
-  }, []);
+  // useEffect(() => {
+  //   const video_id = extractVideoIdFromUrl(
+  //     "https://www.youtube.com/watch?v=sAuEeM_6zpk"
+  //   );
+  //   console.log("video_id", video_id, "type", typeof video_id);
+  // }, []);
 
   const handleStartProcessing = async (videoUrl: string) => {
-    // const videoId = extractVideoIdFromUrl(videoUrl); // sAuEeM_6zpk
-    const videoId = "sAuEeM_6zpk";
+    // const videoId = extractVideoIdFromUrl(videoUrl); // sAuEeM_6zpk (string)
+    const videoId = "OQKbBCVDa7g";
+    console.log("Video id", videoId, "type", typeof videoId);
 
     if (typeof videoId === "string") {
       setResultTranscript("");
       setProcessing(true); // cannot click button
 
-      const transcriptInJapanese = await processVideo(videoId, (message) => {
+      const transcript = await processVideo(videoId, (message) => {
         setProgressOutput((prev) => prev + message);
       });
-      if (transcriptInJapanese) {
-        setResultTranscript(transcriptInJapanese);
+      if (transcript) {
+        setResultTranscript(transcript);
+      } else {
+        alert("Error cannot found transcript");
       }
+
+      // console.log("transcript", transcript);
 
       setProcessing(false);
       // setActiveTab("result");
@@ -57,11 +66,15 @@ export default function transcribe() {
             <textarea
               className="textarea-bordered textarea h-full"
               placeholder="text1"
+              value={progressOutput}
+              readOnly
             ></textarea>
           ) : (
             <textarea
               className="textarea-bordered textarea h-full"
               placeholder="text2"
+              value={resultTranscript}
+              readOnly
             ></textarea>
           )}
           <div className="tabs tabs-boxed justify-center">

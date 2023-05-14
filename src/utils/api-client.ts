@@ -1,3 +1,5 @@
+import { None } from "framer-motion";
+
 export function extractVideoIdFromUrl(url: string) {
   return new URL(url).searchParams.get("v");
 }
@@ -14,22 +16,16 @@ export async function processVideo(
   callback("\nTranscribing audio. It takes a while...\n");
   const srt = await transcribe(videoId, callback);
 
-  //   if (srt) {
-  //     callback("\nTranslating text...\n");
-  //     const result = await translate(srt, callback);
-  //     callback("\nDone!\n");
-  //     return result;
-  //   }
-
   return srt;
 }
 
+// passed
 export async function downloadAudio(
   videoId: string,
   onProgress: ProgressCallback
 ) {
   const res = await fetch(
-    `/api/audio?${new URLSearchParams({ video_id: videoId })}`,
+    `/api/audioApi?${new URLSearchParams({ videoId: videoId })}`,
     {}
   );
   const reader = res.body?.getReader();
@@ -41,12 +37,13 @@ export async function downloadAudio(
   }
 }
 
+// in problem
 export async function transcribe(
   videoId: string,
   onProgress: ProgressCallback
 ): Promise<string | false> {
   const res = await fetch(
-    `/api/transcript?${new URLSearchParams({ videoId: videoId })}`,
+    `/api/transcribe?${new URLSearchParams({ videoId: videoId })}`,
     {}
   );
   const reader = res.body?.getReader();

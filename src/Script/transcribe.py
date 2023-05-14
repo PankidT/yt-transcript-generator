@@ -10,8 +10,6 @@ def transcribe_audio(path):
     transcribe = model.transcribe(audio=path)
     segments = transcribe['segments']
 
-    # print(f'Results: {transcribe["text"]}')
-
     for segment in segments:
         
         startTime = str(0)+str(timedelta(seconds=int(segment['start'])))+',000'
@@ -20,7 +18,7 @@ def transcribe_audio(path):
         segmentId = segment['id']+1
         segment = f"{segmentId}\n{startTime} --> {endTime}\n{text[1:] if text[0] is ' ' else text}\n\n"
 
-        # print(segment)
+        print(segment)
 
         # Specify the directory path and file name
         directory_path = 'SrtFiles'
@@ -32,7 +30,7 @@ def transcribe_audio(path):
             os.makedirs(directory_path)
 
         # Write the segment to the SRT file
-        with open(srt_filename, 'a', encoding='utf-8') as srt_file:
+        with open(srt_filename, 'w', encoding='utf-8') as srt_file:
             srt_file.write(segment)
 
     return srt_filename

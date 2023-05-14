@@ -7,16 +7,16 @@ export default function GET(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const video_id = request.query.video_id as string;
-  if (typeof video_id !== "string") {
+  const videoId = request.query.videoId as string;
+  if (typeof videoId !== "string") {
     response.status(400).json({ error: "Invalid request" });
     return;
   }
 
-  console.log("video ID:", video_id);
+  console.log("videoID:", videoId);
   const cmd = spawn(
     "python",
-    [path.join(process.cwd(), "scripts/transcribe.py"), video_id || ""],
+    [path.join(process.cwd(), "src/Script/transcribe.py"), videoId || ""],
     {
       cwd: process.cwd(),
     }
