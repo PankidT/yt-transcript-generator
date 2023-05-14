@@ -10,8 +10,17 @@ export default function transcribe() {
   const [progressOutput, setProgressOutput] = useState("");
   const [resultTranscript, setResultTranscript] = useState("");
 
+  useEffect(() => {
+    const video_id = extractVideoIdFromUrl(
+      "https://www.youtube.com/watch?v=sAuEeM_6zpk"
+    );
+    console.log("video_id", video_id, "type", typeof video_id);
+  }, []);
+
   const handleStartProcessing = async (videoUrl: string) => {
-    const videoId = extractVideoIdFromUrl(videoUrl); // sAuEeM_6zpk
+    // const videoId = extractVideoIdFromUrl(videoUrl); // sAuEeM_6zpk
+    const videoId = "sAuEeM_6zpk";
+
     if (typeof videoId === "string") {
       setResultTranscript("");
       setProcessing(true); // cannot click button
@@ -29,13 +38,6 @@ export default function transcribe() {
       alert("Invalid URL");
     }
   };
-
-  // useEffect(() => {
-  //   const video_id = extractVideoIdFromUrl(
-  //     "https://www.youtube.com/watch?v=sAuEeM_6zpk&list=RDZRtdQ81jPUQ&index=10"
-  //   );
-  //   console.log("video_id", video_id);
-  // }, []);
 
   return (
     <div className="flex h-screen w-screen flex-col items-center gap-1 p-1">

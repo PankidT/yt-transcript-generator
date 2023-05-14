@@ -46,7 +46,7 @@ export async function transcribe(
   onProgress: ProgressCallback
 ): Promise<string | false> {
   const res = await fetch(
-    `/api/transcript?${new URLSearchParams({ video_id: videoId })}`,
+    `/api/transcript?${new URLSearchParams({ videoId: videoId })}`,
     {}
   );
   const reader = res.body?.getReader();

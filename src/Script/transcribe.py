@@ -10,12 +10,17 @@ def transcribe_audio(path):
     transcribe = model.transcribe(audio=path)
     segments = transcribe['segments']
 
+    # print(f'Results: {transcribe["text"]}')
+
     for segment in segments:
+        
         startTime = str(0)+str(timedelta(seconds=int(segment['start'])))+',000'
         endTime = str(0)+str(timedelta(seconds=int(segment['end'])))+',000'
         text = segment['text']
         segmentId = segment['id']+1
         segment = f"{segmentId}\n{startTime} --> {endTime}\n{text[1:] if text[0] is ' ' else text}\n\n"
+
+        # print(segment)
 
         # Specify the directory path and file name
         directory_path = 'SrtFiles'
@@ -35,7 +40,7 @@ def transcribe_audio(path):
 # openai.api_key = os.getenv("OPENAI_API_KEY")
 
 video_id = sys.argv[1]
-audio_file_path = os.path.join(os.getcwd(), 'tmp', video_id + '.m4a')
+audio_file_path = os.path.join(os.getcwd(), '/Users/poramat/Documents/Programming/react-project/NextJs/transcribe-next-ts/transcribe-next-app/tmp', video_id + '.m4a')
 
 if __name__ == "__main__":
     transcribe_audio(audio_file_path)

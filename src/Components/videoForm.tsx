@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 type Props = {
   onSubmit: (videoUrl: string) => void;
@@ -11,8 +11,30 @@ export const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
 
     const videoUrl = (e.target as HTMLFormElement | undefined)?.videoUrl
       ?.value as string;
+
+    console.log("From videoForm.tsx", videoUrl);
     onSubmit(videoUrl);
   };
+
+  // const [formData, setFormData] = useState({
+  //   url: "",
+  // });
+
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   console.log(formData);
+  // };
+
+  // const handleChange = (
+  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  // ) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevFormData) => ({
+  //     ...prevFormData,
+  //     [name]: value,
+  //   }));
+  // };
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col">
       <p className="my-2">Youtube URL</p>
@@ -21,8 +43,14 @@ export const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
           type="text"
           placeholder="Fill url here"
           className="input-bordered input-primary input w-full"
+          // value={formData.url}
+          // onChange={handleChange}
         />
-        <button className="btn-primary btn" disabled={isProcessing}>
+        <button
+          type="submit"
+          className="btn-primary btn"
+          disabled={isProcessing}
+        >
           {isProcessing ? "Processing.." : "Start processing"}
         </button>
       </div>
