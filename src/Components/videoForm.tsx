@@ -6,14 +6,23 @@ type Props = {
 };
 
 export const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
+  // const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+  //   e.preventDefault();
 
-    const videoUrl = (e.target as HTMLFormElement | undefined)?.videoUrl
-      ?.value as string;
+  //   const videoUrl = (e.target as HTMLFormElement | undefined)?.videoUrl
+  //     ?.value as string;
+  //   onSubmit(videoUrl);
+  // };
+
+  // 2nd way
+  const [videoUrl, setVideoUrl] = useState("");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     onSubmit(videoUrl);
   };
 
+  // 3rd way
   // const [formData, setFormData] = useState({
   //   url: "",
   // });
@@ -36,13 +45,20 @@ export const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col">
       <p className="my-2">Youtube URL</p>
+      {/* <span className="text-red-600 opacity-80" data-message="valueMissing">
+        Please enter a video URL
+      </span>
+      <span className="text-red-600 opacity-80" data-message="typeMismatch">
+        Please provide a valid URL
+      </span> */}
       <div className="flex flex-col gap-2 sm:flex-row">
         <input
           type="text"
-          placeholder="Fill url here"
+          placeholder="Youtube URL here"
           className="input-bordered input-primary input w-full"
-          // value={formData.url}
-          // onChange={handleChange}
+          required
+          value={videoUrl}
+          onChange={(e) => setVideoUrl(e.target.value)}
         />
         <button
           type="submit"
