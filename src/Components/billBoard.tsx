@@ -1,10 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Router from "next/router";
 
 interface BillboardProps {
   imageUrl?: string;
   text?: string;
 }
+
+const router = Router;
 
 const Billboard: React.FC<BillboardProps> = ({ imageUrl, text }) => {
   const url =
@@ -20,7 +23,7 @@ const Billboard: React.FC<BillboardProps> = ({ imageUrl, text }) => {
         />
         <figcaption className="absolute left-[5%] top-[40%] flex flex-col text-left ">
           <motion.h1
-            className="text-5xl"
+            className="text-md md:text-5xl"
             initial={{ opacity: 0, x: -100 }}
             transition={{ delay: 0.3, duration: 0.8 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -28,7 +31,7 @@ const Billboard: React.FC<BillboardProps> = ({ imageUrl, text }) => {
             Transcribe Generator from OpenAI
           </motion.h1>
           <motion.p
-            className="pl-2 pt-4 text-xl"
+            className="pl-2 pt-4 text-sm md:text-xl"
             initial={{ opacity: 0, x: -100 }}
             transition={{ delay: 1, duration: 0.8 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -36,13 +39,26 @@ const Billboard: React.FC<BillboardProps> = ({ imageUrl, text }) => {
             This web application is include in the webapplication subject.
           </motion.p>
           <motion.p
-            className="pl-2 text-xl"
+            className="pl-2 text-sm md:text-xl"
             initial={{ opacity: 0, x: -100 }}
             transition={{ delay: 1, duration: 0.8 }}
             whileInView={{ opacity: 1, x: 0 }}
           >
             The objective is to auto transcript the video from youtube.
           </motion.p>
+          <motion.div
+            className="pl-4 pt-4"
+            initial={{ opacity: 0, x: -100 }}
+            transition={{ delay: 1, duration: 0.8 }}
+            whileInView={{ opacity: 1, x: 0 }}
+          >
+            <button
+              className="btn-outline btn w-36"
+              onClick={() => router.push("transcribe")}
+            >
+              Try now
+            </button>
+          </motion.div>
         </figcaption>
       </figure>
     </div>

@@ -5,16 +5,6 @@ import { FaUserCircle } from "react-icons/fa";
 export const Navbar: React.FC = () => {
   const [navbarColor, setNavbarColor] = useState<string>("transparent");
 
-  //   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-  //     const currentScrollPos: number = e.currentTarget.scrollTop;
-  //     const headerHeight: number = 50;
-  //     if (currentScrollPos > headerHeight) {
-  //       setNavbarColor("bg-base-100");
-  //     } else {
-  //       setNavbarColor("bg-transparent");
-  //     }
-  //   };
-
   useEffect(() => {
     const changeBackground = () => {
       if (window.scrollY >= 30) {
