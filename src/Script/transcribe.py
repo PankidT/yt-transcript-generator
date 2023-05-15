@@ -38,7 +38,7 @@ def transcribe_audio(path):
 # openai.api_key = os.getenv("OPENAI_API_KEY")
 
 video_id = sys.argv[1]
-audio_file_path = os.path.join(os.getcwd(), '/Users/poramat/Documents/Programming/react-project/NextJs/transcribe-next-ts/transcribe-next-app/tmp', video_id + '.m4a')
+audio_file_path = os.path.join(os.getcwd(), 'tmp', video_id + '.m4a')
 
 if __name__ == "__main__":
     transcribe_audio(audio_file_path)
