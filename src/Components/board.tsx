@@ -6,8 +6,8 @@ export const Board = () => {
       <div className="carousel w-full">
         <div id="item1" className="carousel-item w-full">
           <img
-            src="https://w.wallha.com/ws/14/vnNu9BfW.png"
-            className="w-full"
+            src="https://appen.com/wp-content/uploads/2021/12/What-is-Automatic-Speech-Recognition-2-1.png"
+            className="w-full opacity-50"
           />
         </div>
         <div id="item2" className="carousel-item w-full">
