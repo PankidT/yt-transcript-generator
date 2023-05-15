@@ -107,7 +107,7 @@ const Home: NextPage = () => {
 
           <div className="w-full gap-2 bg-base-100 p-4 lg:w-[60%]">
             <h2 className="text-3xl text-primary">
-              <a href="#">About me</a>
+              <a href="#">About me & Project github</a>
             </h2>
             {/* Add horizontal line */}
             <div className="divider"></div>
@@ -118,7 +118,7 @@ const Home: NextPage = () => {
             <div className="card-actions justify-end">
               <Link
                 className="btn-ghost btn whitespace-normal text-primary"
-                href="#"
+                href="/about"
               >
                 Read more
               </Link>
