@@ -35,20 +35,20 @@ const Home: NextPage = () => {
 
           <div className="w-full gap-2 bg-base-100 p-4 lg:w-[60%]">
             <h2 className="text-3xl text-primary">
-              <a href="#">What is DaisyUI</a>
+              <a href="#">What is OpenAi whisper</a>
             </h2>
             {/* Add horizontal line */}
             <div className="divider"></div>
             <p className="overflow-hidden truncate whitespace-normal text-justify text-lg">
-              There are two main goals of quantum communication. On one hand is
-              to provide a means for quantum devices to share quantum states
-              directly among each other without being translated and carried by
-              classical communication media. This development will bring out the
-              full potential of quantum computing and measurement devices,
-              similar to how the internet did for digital devices. On the other
-              hand, quantum principles such as entanglement and superposition
-              provide new ways to generate secret keys and secure many
-              communication tasks unachievable by their digital counterparts.
+              Whisper is an automatic speech recognition (ASR) system trained on
+              680,000 hours of multilingual and multitask supervised data
+              collected from the web. We show that the use of such a large and
+              diverse dataset leads to improved robustness to accents,
+              background noise and technical language. Moreover, it enables
+              transcription in multiple languages, as well as translation from
+              those languages into English. We are open-sourcing models and
+              inference code to serve as a foundation for building useful
+              applications and for further research on robust speech processing.
             </p>
             <div className="card-actions justify-end">
               <Link
@@ -77,20 +77,15 @@ const Home: NextPage = () => {
 
           <div className="w-full gap-2 bg-base-100 p-4 lg:w-[60%]">
             <h2 className="text-3xl text-primary">
-              <a href="#">Quick start</a>
+              <a href="#">Speech to Text open source</a>
             </h2>
             {/* Add horizontal line */}
             <div className="divider"></div>
             <p className="overflow-hidden truncate whitespace-normal text-justify text-lg">
-              There are two main goals of quantum communication. On one hand is
-              to provide a means for quantum devices to share quantum states
-              directly among each other without being translated and carried by
-              classical communication media. This development will bring out the
-              full potential of quantum computing and measurement devices,
-              similar to how the internet did for digital devices. On the other
-              hand, quantum principles such as entanglement and superposition
-              provide new ways to generate secret keys and secure many
-              communication tasks unachievable by their digital counterparts.
+              A speech-to-text (STT) system, or sometimes called automatic
+              speech recognition (ASR) is as its name implies: A way of
+              transforming the spoken words via sound into textual data that can
+              be used later for any purpose.
             </p>
             <div className="card-actions justify-end">
               <Link
@@ -119,7 +114,7 @@ const Home: NextPage = () => {
 
           <div className="w-full gap-2 bg-base-100 p-4 lg:w-[60%]">
             <h2 className="text-3xl text-primary">
-              <a href="#">About us</a>
+              <a href="#">About me</a>
             </h2>
             {/* Add horizontal line */}
             <div className="divider"></div>
