@@ -9,6 +9,8 @@ export default function GET(
 ) {
   const videoId = request.query.videoId as string;
   const targetLanguage = request.query.language as string;
+  const model = request.query.model as string;
+
   if (typeof videoId !== "string") {
     response.status(400).json({ error: "Invalid request" });
     return;
@@ -19,14 +21,18 @@ export default function GET(
     return;
   }
 
-  console.log("videoID:", videoId);
-  console.log("targetLanguage:", targetLanguage);
+  if (typeof model !== "string") {
+    response.status(400).json({ error: "Invalid request" });
+    return;
+  }
+
   const cmd = spawn(
     "python",
     [
       path.join(process.cwd(), "src/Script/transcribe.py"),
       videoId,
-      targetLanguage || "",
+      targetLanguage,
+      model || "",
     ],
     {
       cwd: process.cwd(),

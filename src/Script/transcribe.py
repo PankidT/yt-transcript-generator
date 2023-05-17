@@ -5,10 +5,10 @@ import whisper
 from datetime import timedelta
 from googletrans import Translator
 
-def transcribe_audio(path, language):
-    model = whisper.load_model("base") # Change this to your desired model
-    print("Whisper model loaded.")
-    transcribe = model.transcribe(audio=path)
+def transcribe_audio(path, language, model):
+    selectedModel = whisper.load_model(model) # Change this to your desired model
+    print(f"Whisper {model} model loaded.")
+    transcribe = selectedModel.transcribe(audio=path)
     segments = transcribe['segments']
 
     for segment in segments:
@@ -42,8 +42,9 @@ def transcribe_audio(path, language):
 
 video_id = sys.argv[1]
 language = sys.argv[2]
+model = sys.argv[3]
 
 audio_file_path = os.path.join(os.getcwd(), 'tmp', video_id + '.m4a')
 
 if __name__ == "__main__":
-    transcribe_audio(audio_file_path, language)
+    transcribe_audio(audio_file_path, language, model)

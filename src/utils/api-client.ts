@@ -7,13 +7,14 @@ type ProgressCallback = (output: string) => void;
 export async function processVideo(
   videoId: string,
   targetLanguage: string,
+  targetModel: string,
   callback: ProgressCallback
 ): Promise<false | string> {
   callback("Downloading audio...\n");
   await downloadAudio(videoId, callback);
 
   callback("\nTranscribing audio. It takes a while...\n");
-  const srt = await transcribe(videoId, targetLanguage, callback);
+  const srt = await transcribe(videoId, targetLanguage, targetModel, callback);
 
   return srt;
 }
@@ -40,6 +41,7 @@ export async function downloadAudio(
 export async function transcribe(
   videoId: string,
   targetLanguage: string,
+  targetModel: string,
   onProgress: ProgressCallback
 ): Promise<string | false> {
   // const res = await fetch(
@@ -50,6 +52,7 @@ export async function transcribe(
   const params = new URLSearchParams();
   params.append("videoId", videoId);
   params.append("language", targetLanguage);
+  params.append("model", targetModel);
 
   const res = await fetch(`/api/transcribe?${params.toString()}`, {});
 

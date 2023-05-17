@@ -124,11 +124,15 @@ const googleArray = Object.entries(google_language).map(([key, value]) => {
 type ModelSettingType = {
   language: string;
   setLanguage: React.Dispatch<React.SetStateAction<string>>;
+  model: string;
+  setModel: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const ModalContext = createContext<ModelSettingType>({
   language: "none",
   setLanguage: () => {},
+  model: "base",
+  setModel: () => {},
 });
 
 export default function ModalProvider({
@@ -137,22 +141,28 @@ export default function ModalProvider({
   children: React.ReactNode;
 }) {
   const [language, setLanguage] = useState<string>("none");
+  const [model, setModel] = useState<string>("base");
 
   return (
-    <ModalContext.Provider value={{ language, setLanguage }}>
+    <ModalContext.Provider value={{ language, setLanguage, model, setModel }}>
       {children}
     </ModalContext.Provider>
   );
 }
 
 export const ModelSetting = () => {
-  const { language, setLanguage } = useContext(ModalContext);
+  const { language, setLanguage, model, setModel } = useContext(ModalContext);
 
   const handleLanguageChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     const selectedLanguage: string = event.target.value;
     setLanguage(selectedLanguage);
+  };
+
+  const handleModelChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectModel: string = event.target.value;
+    setModel(selectModel);
   };
 
   return (
@@ -167,6 +177,8 @@ export const ModelSetting = () => {
           <p className="py-4">OpenAI Whisper model</p>
           <select
             className="select-bordered select w-full max-w-xs"
+            value={model}
+            onChange={handleModelChange}
             defaultValue={"base"}
           >
             <option value={"tiny"}>tiny</option>

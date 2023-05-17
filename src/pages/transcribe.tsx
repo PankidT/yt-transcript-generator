@@ -17,25 +17,31 @@ export default function transcribe() {
   const [progressOutput, setProgressOutput] = useState("");
   const [resultTranscript, setResultTranscript] = useState("");
 
-  const { language } = useContext(ModalContext);
+  const { language, model } = useContext(ModalContext);
 
   useEffect(() => {
     console.log("target language: ", language);
-  }, [language]);
+    console.log("model: ", model);
+  }, [language, model]);
 
   const handleStartProcessing = async (videoUrl: string) => {
     // const video_Url = "https://www.youtube.com/watch?v=OQKbBCVDa7g";
     const videoId = extractVideoIdFromUrl(videoUrl); // sAuEeM_6zpk (string)
 
-    console.log("Video id", videoId, "type", typeof videoId);
+    console.log("Video id", videoId, "Model", model, "Language", language);
 
     if (typeof videoId === "string") {
       setResultTranscript("");
       setProcessing(true);
 
-      const transcript = await processVideo(videoId, language, (message) => {
-        setProgressOutput((prev) => prev + message);
-      });
+      const transcript = await processVideo(
+        videoId,
+        language,
+        model,
+        (message) => {
+          setProgressOutput((prev) => prev + message);
+        }
+      );
 
       if (transcript) {
         setResultTranscript(transcript);
