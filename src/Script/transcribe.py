@@ -3,8 +3,9 @@ import os
 import sys
 import whisper
 from datetime import timedelta
+from googletrans import Translator
 
-def transcribe_audio(path):
+def transcribe_audio(path, language):
     model = whisper.load_model("base") # Change this to your desired model
     print("Whisper model loaded.")
     transcribe = model.transcribe(audio=path)
@@ -16,9 +17,13 @@ def transcribe_audio(path):
         endTime = str(0)+str(timedelta(seconds=int(segment['end'])))+',000'
         text = segment['text']
         segmentId = segment['id']+1
-        segment = f"{segmentId}\n{startTime} --> {endTime}\n{text[1:] if text[0] is ' ' else text}\n\n"
+        segment = f"{segmentId}\n{startTime} --> {endTime}\n{text[1:] if text[0] is ' ' else text}\n"
+        translator = Translator()
 
         print(segment)
+        if (len(text) > 0 and language != 'none'):
+            translation = translator.translate(text, dest=language)
+            print(f"{translation.text}\n\n")
 
         # Specify the directory path and file name
         directory_path = 'SrtFiles'
@@ -35,10 +40,10 @@ def transcribe_audio(path):
 
     return srt_filename
 
-# openai.api_key = os.getenv("OPENAI_API_KEY")
-
 video_id = sys.argv[1]
+language = sys.argv[2]
+
 audio_file_path = os.path.join(os.getcwd(), 'tmp', video_id + '.m4a')
 
 if __name__ == "__main__":
-    transcribe_audio(audio_file_path)
+    transcribe_audio(audio_file_path, language)

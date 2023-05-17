@@ -1,5 +1,3 @@
-import { None } from "framer-motion";
-
 export function extractVideoIdFromUrl(url: string) {
   return new URL(url).searchParams.get("v");
 }
@@ -8,13 +6,14 @@ type ProgressCallback = (output: string) => void;
 
 export async function processVideo(
   videoId: string,
+  targetLanguage: string,
   callback: ProgressCallback
 ): Promise<false | string> {
   callback("Downloading audio...\n");
   await downloadAudio(videoId, callback);
 
   callback("\nTranscribing audio. It takes a while...\n");
-  const srt = await transcribe(videoId, callback);
+  const srt = await transcribe(videoId, targetLanguage, callback);
 
   return srt;
 }
@@ -40,12 +39,20 @@ export async function downloadAudio(
 // in problem
 export async function transcribe(
   videoId: string,
+  targetLanguage: string,
   onProgress: ProgressCallback
 ): Promise<string | false> {
-  const res = await fetch(
-    `/api/transcribe?${new URLSearchParams({ videoId: videoId })}`,
-    {}
-  );
+  // const res = await fetch(
+  //   `/api/transcribe?${new URLSearchParams({ videoId: videoId })}`,
+  //   {}
+  // );
+
+  const params = new URLSearchParams();
+  params.append("videoId", videoId);
+  params.append("language", targetLanguage);
+
+  const res = await fetch(`/api/transcribe?${params.toString()}`, {});
+
   const reader = res.body?.getReader();
 
   if (reader) {

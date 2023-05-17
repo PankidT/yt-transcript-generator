@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { VideoForm } from "~/Components/videoForm";
 import {
   extractVideoIdFromUrl,
@@ -6,6 +6,8 @@ import {
   downloadAudio,
 } from "~/utils/api-client";
 import { CustomLayout } from "~/Layout/CustomLayout";
+import LoadingAnimation from "~/Components/loadingAnimation";
+import { ModalContext } from "~/Components/modelSetting";
 
 export default function transcribe() {
   const [onClick, setOnClick] = useState(true);
@@ -15,29 +17,33 @@ export default function transcribe() {
   const [progressOutput, setProgressOutput] = useState("");
   const [resultTranscript, setResultTranscript] = useState("");
 
+  const { language } = useContext(ModalContext);
+
+  useEffect(() => {
+    console.log("target language: ", language);
+  }, [language]);
+
   const handleStartProcessing = async (videoUrl: string) => {
     // const video_Url = "https://www.youtube.com/watch?v=OQKbBCVDa7g";
     const videoId = extractVideoIdFromUrl(videoUrl); // sAuEeM_6zpk (string)
-    // const videoId = "OQKbBCVDa7g";
+
     console.log("Video id", videoId, "type", typeof videoId);
 
     if (typeof videoId === "string") {
       setResultTranscript("");
-      setProcessing(true); // cannot click button
+      setProcessing(true);
 
-      const transcript = await processVideo(videoId, (message) => {
+      const transcript = await processVideo(videoId, language, (message) => {
         setProgressOutput((prev) => prev + message);
       });
+
       if (transcript) {
         setResultTranscript(transcript);
       } else {
         alert("Error cannot found transcript");
       }
 
-      // console.log("transcript", transcript);
-
       setProcessing(false);
-      // setActiveTab("result");
     } else {
       alert("Invalid URL");
     }
@@ -58,6 +64,7 @@ export default function transcribe() {
                 isProcessing={isProcessing}
               />
             </div>
+
             {onClick ? (
               <textarea
                 className="textarea-bordered textarea h-full"
@@ -88,6 +95,15 @@ export default function transcribe() {
                 Output
               </a>
             </div>
+          </div>
+        </div>
+        <div className="flex h-14 w-full justify-end">
+          <div className="h-14 w-14 ">
+            {isProcessing ? (
+              <div className="flex items-center justify-center">
+                <LoadingAnimation />
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
