@@ -133,9 +133,9 @@ const Home: NextPage = () => {
                 {/* Add horizontal line */}
                 <div className="divider"></div>
                 <p className="overflow-hidden truncate whitespace-normal text-justify text-lg">
-                  My name is Poramat Chianvichai. The student of Innovative
-                  physics program, Mahidol University. Learn more about my
-                  information.
+                  My name is Poramat Chianvichai. I am a student of Innovative
+                  physics program, Mahidol University. This is my final project
+                  in web application subject. Learn more about my information.
                 </p>
                 <div className="card-actions justify-end">
                   <Link
