@@ -179,7 +179,6 @@ export const ModelSetting = () => {
             className="select-bordered select w-full max-w-xs"
             value={model}
             onChange={handleModelChange}
-            defaultValue={"base"}
           >
             <option value={"tiny"}>tiny</option>
             <option value={"base"}>base (reccommend)</option>
@@ -192,12 +191,13 @@ export const ModelSetting = () => {
             className="select-bordered select w-full max-w-xs"
             value={language}
             onChange={handleLanguageChange}
-            defaultValue={"none"}
           >
             <option value={"none"}>none</option>
-            {googleArray.map((item) => {
+            {googleArray.map((item, key) => {
               return (
-                <option value={item.modifiedKey}>{item.modifiedValue}</option>
+                <option value={item.modifiedKey} key={key}>
+                  {item.modifiedValue}
+                </option>
               );
             })}
           </select>
