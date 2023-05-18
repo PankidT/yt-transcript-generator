@@ -38,8 +38,9 @@ const Home: NextPage = () => {
                 <Image
                   className="object-cover"
                   src={whisper1}
-                  alt="figure 1"
+                  alt="whisper"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
 
@@ -80,8 +81,9 @@ const Home: NextPage = () => {
                 <Image
                   className="object-cover"
                   src={opensource}
-                  alt="figure 1"
+                  alt="STT"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
 
@@ -118,8 +120,9 @@ const Home: NextPage = () => {
                 <Image
                   className="object-cover"
                   src={profile}
-                  alt="figure 1"
+                  alt="about"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
 
